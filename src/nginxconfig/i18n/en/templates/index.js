@@ -15,5 +15,6 @@ limitations under the License.
 */
 
 import app from './app';
+import domainSections from './domain_sections';
 
-export default { app };
+export default { app, domainSections };
