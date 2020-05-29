@@ -17,5 +17,6 @@ limitations under the License.
 import https from './https';
 import logging from './logging';
 import php from './php';
+import presets from './presets';
 
-export default { https, logging, php };
+export default { https, logging, php, presets };
