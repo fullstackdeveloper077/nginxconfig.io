@@ -18,5 +18,7 @@ import https from './https';
 import logging from './logging';
 import php from './php';
 import presets from './presets';
+import python from './python';
+import reverseProxy from './reverse_proxy';
 
-export default { https, logging, php, presets };
+export default { https, logging, php, presets, python, reverseProxy };
