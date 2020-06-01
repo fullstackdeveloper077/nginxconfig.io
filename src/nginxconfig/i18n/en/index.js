@@ -16,4 +16,6 @@ limitations under the License.
 
 import templates from './templates';
 
+// TODO: centralised shared strings
+
 export default { templates };
