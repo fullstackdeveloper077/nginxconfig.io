@@ -24,8 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import escape from 'escape-html';
 import renames from './renames';
 import confLines from './conf_lines';
+import names from './names';
 
 export default (newConf, oldConf) => {
     // Consider renames
@@ -35,21 +37,30 @@ export default (newConf, oldConf) => {
     const newFiles = {};
 
     // Work through each file in the new config
-    for (const newFileName in newConf) {
-        if (!Object.prototype.hasOwnProperty.call(newConf, newFileName)) continue;
-        const newFileConf = newConf[newFileName];
+    for (const name in newConf) {
+        if (!Object.prototype.hasOwnProperty.call(newConf, name)) continue;
+
+        let newFileName = escape(name);
+        let newFileConf = escape(newConf[name]);
 
         // If this file was in the old config (same name or renamed & similar)
-        const old = oldConf && oldConf[renameMap[newFileName]];
-        if (old && old !== newFileConf) {
-            // Store the diff
-            console.info(`Diffing ${newFileName}...`);
-            newFiles[newFileName] = confLines(newFileConf, old);
-            continue;
+        // Calculate the diff of the configs
+        const old = oldConf && oldConf[renameMap[name]];
+        if (old && old !== newConf[name]) {
+            console.info(`Diffing ${name}...`);
+            newFileConf = confLines(newConf[name], old);
         }
 
-        // No diffing, just store the new file
-        newFiles[newFileName] = newFileConf;
+        // If the file was renamed we should diff that too
+        if (name in renameMap && renameMap[name] !== name) {
+            newFileName = names(name, renameMap[name]);
+        }
+
+        // Store!
+        newFiles[name] = [
+            newFileName,
+            newFileConf,
+        ];
     }
 
     // Done
