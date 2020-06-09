@@ -26,8 +26,10 @@ THE SOFTWARE.
 
 .panel {
   margin-top: 0;
+  max-width: calc(100% - 1rem);
   padding: 1.5rem 0 2rem;
   text-align: left;
+  width: calc(100% - 1rem);
 
   // The presets panel has a custom header with a dropdown indicator
   &.presets {
