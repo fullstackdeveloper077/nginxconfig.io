@@ -36,6 +36,7 @@ export default {
 	letsEncrypt: 'Let\'s Encrypt',
 	python: 'Python',
 	docker: 'Docker',
+	dockerCompose: 'Docker Compose',
 	wordPress: 'WordPress',
 	drupal: 'Drupal',
 	magento: 'Magento',
